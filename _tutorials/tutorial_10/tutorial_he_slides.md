@@ -607,16 +607,29 @@ $$
 #### הגדרת הבעיה
 
 - המשתנים בבעיה:
-  - תמונה בגודל 28x28 של סיפרה בכתב יד - $$x$$
+  - תמונה בגודל 28x28 של סיפרה בכתב יד - $$\boldsymbol{x}$$
   - ערך הסיפרה: \[0-9\] - $$y$$
 
 <br>
 
-המודל יהיה החזאי $$\hat{y}=h^*\left(\boldsymbol{x}\right)$$ שתפקידו למזעזר את פונקציית המחיר misclassification rate:
+- רשת הנוירוניים $$\boldsymbol{f}\left(\boldsymbol{x};\boldsymbol{\theta}\right)$$ תשמש כמשפחה הפרמטרית אשר בעזרתה ננסה ללמוד את הפילוג $$P_{Y\lvert X}$$:
 
-$$
-h^*=\underset{h}{\arg\min}\ E\left[I\left\lbrace h\left(\boldsymbol{x}\right)\neq y\right\rbrace\right]
-$$
+  $$
+  P_{Y\lvert X}\left(y\middle\lvert\boldsymbol{x};\boldsymbol{\theta}\right)={\text{softmax}\left(\boldsymbol{f}\left(\boldsymbol{x};\boldsymbol{\theta}\right)\right)}_y
+  $$
+
+- הלימוד יעשה בעזרת MLE (אשר שקול למזעור של הcross entropy).
+
+<br>
+
+- החזאי אשר ימזער את ה missclassification rate יהיה:
+
+  $$
+  \hat{y}
+  =h\left(\boldsymbol{x}\right)
+  =\underset{y}{\arg\max}\ P_{Y\lvert X}\left(y\middle\lvert\boldsymbol{x};\boldsymbol{\theta}\right)
+  =\underset{y}{\arg\max}\ f_y\left(\boldsymbol{x};\boldsymbol{\theta}\right)
+  $$
 
 </section><section markdown="1">
 
